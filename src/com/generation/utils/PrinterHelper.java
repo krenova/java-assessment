@@ -26,7 +26,6 @@ public class PrinterHelper
         System.out.println( "| . 8 Show Courses Summary        |" );
         System.out.println( "| . 9 Show Student Course Passes  |" );
         System.out.println( "| . 10 Exit                       |" );
-        System.out.println( "| . 11 Exit                       |" );
         System.out.println( "|---------------------------------|" );
     }
 
