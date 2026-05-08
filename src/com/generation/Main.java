@@ -18,6 +18,10 @@ public class Main
         StudentService studentService = new StudentService();
         CourseService courseService = new CourseService();
         Scanner scanner = new Scanner( System.in );
+
+        //FIXME (Temporary pre-population of students to student courses)
+        enrollStudentToCourse( studentService, courseService, scanner );
+
         int option = 0;
         do
         {
@@ -43,9 +47,12 @@ public class Main
                 case 6:
                     showCoursesSummary( courseService, scanner );
                     break;
+                case 7:
+                    showPassedCourses( studentService, scanner);
+                    break;
             }
         }
-        while ( option != 7 );
+        while ( option != 8 );
     }
 
     private static void enrollStudentToCourse( StudentService studentService, CourseService courseService,
@@ -75,6 +82,26 @@ public class Main
 
     }
 
+    private static void showPassedCourses(StudentService studentService, Scanner scanner)
+    {
+        System.out.println( "Enter student ID: " );
+        String studentId = scanner.next();
+        Student student = studentService.findStudent( studentId );
+        if ( student != null )
+        {
+            System.out.println( "Student Found: " );
+            System.out.println( student );
+
+            //TODO Show the student courses passed
+            studentService.showPassedCourses(student);
+
+        }
+        else
+        {
+            System.out.println( "Student with Id = " + studentId + " not found" );
+        }
+    }
+
     private static void showCoursesSummary( CourseService courseService, Scanner scanner )
     {
         courseService.showSummary();
@@ -87,6 +114,39 @@ public class Main
 
     private static void gradeStudent( StudentService studentService, Scanner scanner )
     {
+        //TODO - How do we grade the student
+        // 1. ask for the student id first.
+        // 2. find the student first
+        // 3. ask for the course id next
+        // 4. find whether the student is taking the course
+        // 5. what is the grade to assign to the student
+        // Our analogy is to find the averages of each module
+
+        System.out.println("Please enter the student's ID: ");
+        String studentId = scanner.next();
+        Student student = studentService.findStudent(studentId);
+
+
+        if ( student != null ) {
+            System.out.printf("Please enter the course ID for student ID: %s%n", studentId);
+            String courseId = scanner.next();
+            boolean isAttendingCourse = student.isAttendingCourse(courseId);
+
+            if (isAttendingCourse) {
+                System.out.println("Please enter the student's score:");
+                double score = scanner.nextDouble();
+                if (score<0 || score>9)
+                    System.out.println("Invalid score entry.");
+                else
+                    System.out.println(student.setGrade(courseId, score));
+            } else {
+                System.out.printf("The student (Student ID: %s) is not attending course ID: %s%n", studentId, courseId);
+            }
+
+        } else {
+            System.out.println( "Student with Id = " + studentId + " not found" );
+        }
+
 
     }
 

@@ -22,7 +22,8 @@ public class PrinterHelper
         System.out.println( "| . 4 Enroll Student to Course  |" );
         System.out.println( "| . 5 Show Students Summary     |" );
         System.out.println( "| . 6 Show Courses Summary      |" );
-        System.out.println( "| . 7 Exit                      |" );
+        System.out.println( "| . 7 Show Student Course Passes|" );
+        System.out.println( "| . 8 Exit                      |" );
         System.out.println( "|-------------------------------|" );
     }
 
@@ -38,11 +39,26 @@ public class PrinterHelper
         String id = scanner.next();
         System.out.println( "| Enter student email:                |" );
         String email = scanner.next();
-        System.out.println( "| Enter student birth date(mm/dd/yyyy)|" );
-        DateFormat formatter = new SimpleDateFormat( "mm/dd/yyyy");
-        //TODO validate date format and catch exception to avoid crash
-        Date birthDate = formatter.parse( scanner.next());
-        System.out.println( "|-------------------------------------|" );
+
+        //TODO (done) validate date format and catch exception to avoid crash
+        DateFormat formatter = new SimpleDateFormat( "MM/dd/yyyy");
+        Date birthDate = null;
+        boolean isValidDate = false;
+        scanner.nextLine(); // buffer residue ("\n") from previous entries needs to be cleared.
+
+        do {
+            System.out.println("| Enter student birth date (MM/dd/yyyy) |");
+            String inputDate = scanner.nextLine();
+
+            try {
+                birthDate = formatter.parse(inputDate);
+                System.out.println( "|-------------------------------------|" );
+                isValidDate = true;
+            } catch (ParseException e) {
+                System.out.println("Wrong date format! Use MM/dd/yyyy");
+            }
+        } while (!isValidDate);
+
         Student student = new Student( id, name, email, birthDate );
         System.out.println( "Student Successfully Registered! " );
         System.out.println(student);

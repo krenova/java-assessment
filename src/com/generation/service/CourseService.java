@@ -17,8 +17,7 @@ public class CourseService
 
     public CourseService()
     {
-        Module module = new Module( "INTRO-CS", "Introduction to Computer Science",
-                                    "Introductory module for the generation technical programs" );
+        Module module = new Module( "INTRO-CS", "Introduction to Computer Science", "Introductory module for the generation technical programs" );
         registerCourse( new Course( "INTRO-CS-1", "Introduction to Computer Science", 9, module ) );
         registerCourse( new Course( "INTRO-CS-2", "Introduction to Algorithms", 9, module ) );
         registerCourse( new Course( "INTRO-CS-3", "Algorithm Design and Problem Solving - Introduction ", 9, module ) );
