@@ -12,19 +12,22 @@ public class PrinterHelper
 {
 
     public static void showMainMenu(){
-        System.out.println( "|-------------------------------|" );
-        System.out.println( "| Welcome to StudentGen         |" );
-        System.out.println( "|-------------------------------|" );
-        System.out.println( "| Select 1 option:              |" );
-        System.out.println( "| . 1 Register Student          |" );
-        System.out.println( "| . 2 Find Student              |" );
-        System.out.println( "| . 3 Grade Student             |" );
-        System.out.println( "| . 4 Enroll Student to Course  |" );
-        System.out.println( "| . 5 Show Students Summary     |" );
-        System.out.println( "| . 6 Show Courses Summary      |" );
-        System.out.println( "| . 7 Show Student Course Passes|" );
-        System.out.println( "| . 8 Exit                      |" );
-        System.out.println( "|-------------------------------|" );
+        System.out.println( "|---------------------------------|" );
+        System.out.println( "| Welcome to StudentGen           |" );
+        System.out.println( "|---------------------------------|" );
+        System.out.println( "| Select 1 option:                |" );
+        System.out.println( "| . 1 Register Student            |" );
+        System.out.println( "| . 2 Find Student                |" );
+        System.out.println( "| . 3 Grade Student               |" );
+        System.out.println( "| . 4 Check Student Course Status |" );
+        System.out.println( "| . 5 Check Student's Subscription|" );
+        System.out.println( "| . 6 Enroll Student to Course    |" );
+        System.out.println( "| . 7 Show Students Summary       |" );
+        System.out.println( "| . 8 Show Courses Summary        |" );
+        System.out.println( "| . 9 Show Student Course Passes  |" );
+        System.out.println( "| . 10 Exit                       |" );
+        System.out.println( "| . 11 Exit                       |" );
+        System.out.println( "|---------------------------------|" );
     }
 
     public static Student createStudentMenu( Scanner scanner )

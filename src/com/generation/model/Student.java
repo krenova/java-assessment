@@ -32,7 +32,6 @@ public class Student
             courses.add(course);
             registerApprovedCourse(course);
             this.average += (double) course.getCredits() /2;
-            // this.average = (this.average * (approvedCourses.size() - 1) + (double) course.getCredits()) / approvedCourses.size();
 
         } else {
             System.out.printf("Student already enrolled to %s%n", course.getName());
@@ -59,14 +58,14 @@ public class Student
 
     public boolean isCourseApproved( String courseCode )
     {
-        //TODO implement this method
-        return false;
+        //TODO (DONE) implement this method
+        return approvedCourses.containsKey(courseCode);
     }
 
     // CHALLENGE IMPLEMENTATION: Read README.md to find instructions on how to solve.
     public List<Course> findPassedCourses( )
     {
-        //TODO (done) implement this method
+        //TODO (DONE) implement this method
         List<Course> passCourses = new ArrayList<>();
 
         courseGrades.forEach((courseId, score) -> {
@@ -83,7 +82,7 @@ public class Student
 
     public boolean isAttendingCourse( String courseCode )
     {
-        //TODO (Done) implement this method
+        //TODO (DONE) implement this method
         return approvedCourses.containsKey(courseCode);
     }
 

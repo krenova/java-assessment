@@ -31,8 +31,8 @@ public class StudentService
 
     public boolean isSubscribed( String studentId )
     {
-        //TODO implement this method
-        return false;
+        //TODO (DONE) implement this method
+        return students.containsKey( studentId );
     }
 
     public void showSummary()
@@ -71,7 +71,7 @@ public class StudentService
 
     public void showPassedCourses(Student student)
     {
-        //TODO (done)
+        //TODO (DONE)
         // 1. get the student
         // 2. call findPassedCourses
         // 3. display the list of courses returned from findPassedCourses

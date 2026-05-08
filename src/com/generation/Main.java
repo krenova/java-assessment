@@ -7,7 +7,7 @@ import com.generation.service.StudentService;
 import com.generation.utils.PrinterHelper;
 
 import java.text.ParseException;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main
 {
@@ -19,8 +19,44 @@ public class Main
         CourseService courseService = new CourseService();
         Scanner scanner = new Scanner( System.in );
 
-        //FIXME (Temporary pre-population of students to student courses)
-        enrollStudentToCourse( studentService, courseService, scanner );
+        //FIXME (DONE) ----------------------------------------------
+        // - Temporary pre-population of students to student courses
+        //   for simulation and testing purposes
+//        String[] _studentIds = {"001","002","003"};
+//
+//        // To generate distinct course numbers
+//        List<Integer> numbers = new ArrayList<>(Set.of(1, 2, 3, 4, 5,6,7));
+//        Collections.shuffle(numbers);
+//        List<Integer> sample = numbers.subList(0, 3);
+//        String[] _courseIds = {
+//                String.format("INTRO-CS-%d", sample.get(0)),
+//                String.format("INTRO-CS-%d", sample.get(1)),
+//                String.format("INTRO-CS-%d", sample.get(2))
+//        };
+//
+//        for (int i = 0; i < 3; i++) {
+//            for (int j = 0; j < 3; j++) {
+//                System.out.println("Student '" + _studentIds[i] + "' enrolled in '" + _courseIds[i] + "'.");
+//            }
+//        }
+//
+//        for (int i = 0; i < 3; i++) {
+//
+//            String _studentId = _studentIds[i];
+//
+//            for (int j = 0; j < 3; j++) {
+//
+//                String _courseId = _courseIds[j];
+//
+//                Student _student = studentService.findStudent( _studentId );
+//                Course _course = courseService.getCourse( _courseId );
+//
+//                courseService.enrollStudent( _courseId, _student );
+//                studentService.enrollToCourse( _studentId, _course );
+//            }
+//        }
+        //FIXME (DONE) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
 
         int option = 0;
         do
@@ -39,20 +75,67 @@ public class Main
                     gradeStudent( studentService, scanner );
                     break;
                 case 4:
-                    enrollStudentToCourse( studentService, courseService, scanner );
+                    checkStudentCourseStatus( studentService, courseService, scanner );
                     break;
                 case 5:
-                    showStudentsSummary( studentService, scanner );
+                    checkStudentSubscription( studentService, scanner );
                     break;
                 case 6:
-                    showCoursesSummary( courseService, scanner );
+                    enrollStudentToCourse( studentService, courseService, scanner );
                     break;
                 case 7:
+                    showStudentsSummary( studentService, scanner );
+                    break;
+                case 8:
+                    showCoursesSummary( courseService, scanner );
+                    break;
+                case 9:
                     showPassedCourses( studentService, scanner);
                     break;
             }
         }
-        while ( option != 8 );
+        while ( option != 10 );
+    }
+
+    private static void checkStudentSubscription(StudentService studentService, Scanner scanner)
+    {
+        System.out.println( "Insert student ID" );
+        String studentId = scanner.next();
+        if (studentService.isSubscribed( studentId )) {
+            System.out.printf("Student %s is SUBSCRIBED.%n",studentId);
+        } else {
+            System.out.printf("Student %s is NOT subscribed.%n",studentId);
+        }
+    }
+
+
+    //TODO (DONE) - To test isCourseApproved() functionality
+    private static void checkStudentCourseStatus(StudentService studentService, CourseService courseService,
+                                                 Scanner scanner )
+    {
+        System.out.println( "Insert student ID" );
+        String studentId = scanner.next();
+        Student student = studentService.findStudent( studentId );
+        if ( student == null )
+        {
+            System.out.println( "Invalid Student ID" );
+            return;
+        }
+        System.out.println( student );
+        System.out.println( "Insert course ID" );
+        String courseId = scanner.next();
+        Course course = courseService.getCourse( courseId );
+        if ( course == null )
+        {
+            System.out.println( "Invalid Course ID" );
+            return;
+        }
+        if(student.isCourseApproved(courseId)) {
+            System.out.printf("Student %s's enrollment in '%s' is APPROVED.%n",studentId,courseId);
+        } else {
+            System.out.printf("Student %s's enrollment in '%s' has NOT been approved.%n",studentId,courseId);
+        }
+
     }
 
     private static void enrollStudentToCourse( StudentService studentService, CourseService courseService,
@@ -92,7 +175,7 @@ public class Main
             System.out.println( "Student Found: " );
             System.out.println( student );
 
-            //TODO Show the student courses passed
+            //TODO (DONE) Show the student courses passed
             studentService.showPassedCourses(student);
 
         }
@@ -114,7 +197,7 @@ public class Main
 
     private static void gradeStudent( StudentService studentService, Scanner scanner )
     {
-        //TODO - How do we grade the student
+        //TODO (DONE) - How do we grade the student
         // 1. ask for the student id first.
         // 2. find the student first
         // 3. ask for the course id next
